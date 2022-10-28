@@ -4,7 +4,7 @@ import styles from "./style";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const Signup = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,9 +48,9 @@ const Signup = () => {
         onChangeText={(value) => handleInputChange("password", value)}
         secureTextEntry
       />
-      <Button title="Signup" onPress={handleRegister} />
+      <Button title="Register" onPress={handleRegister} />
     </View>
   );
 };
 
-export default Signup;
+export default Register;
