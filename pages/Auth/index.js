@@ -3,22 +3,26 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   Alert,
   TouchableOpacity,
   Image,
   StatusBar,
 } from "react-native";
 import styles from "./style";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useNavigation } from "@react-navigation/native";
 
-const Login = () => {
+const Auth = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    rePassword: "",
   });
+  const [isLogin, setIsLogin] = useState(true);
 
   const navigation = useNavigation();
 
@@ -29,22 +33,38 @@ const Login = () => {
     });
   };
 
-  const handleLogin = () => {
+  const loginFirebase = () => {
     signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        Alert.alert("Success", "Login Successful");
-        // ...
+        navigation.navigate("Home");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error.code);
-        console.log(error.message);
         Alert.alert("Error", errorMessage);
-        // ..
       });
+  };
+
+  const registerFirebase = () => {
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setIsLogin(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        Alert.alert("Error", errorMessage);
+      });
+  };
+
+  const handleSubmit = () => {
+    if (isLogin) {
+      loginFirebase();
+    } else {
+      registerFirebase();
+    }
   };
 
   return (
@@ -63,7 +83,9 @@ const Login = () => {
         </View>
         <View style={styles.white_sheet} />
         <View style={styles.form_container}>
-          <Text style={styles.header_text}>Login</Text>
+          <Text style={styles.header_text}>
+            {isLogin ? "Login" : "Create Account"}
+          </Text>
           <TextInput
             placeholder="Enter email"
             placeholderTextColor="#9e9e9e"
@@ -81,14 +103,39 @@ const Login = () => {
             secureTextEntry
             autoCapitalize="none"
           />
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btn_text}>Login</Text>
+          {isLogin && (
+            <TextInput
+              placeholder="Confirm password"
+              placeholderTextColor="#9e9e9e"
+              style={styles.input}
+              value={formData.rePassword}
+              onChangeText={(value) => handleInputChange("rePassword", value)}
+              secureTextEntry
+              autoCapitalize="none"
+            />
+          )}
+
+          <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+            <Text style={styles.btn_text}>
+              {isLogin ? "Login" : "Register"}
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.navigation_container}>
-            <Text>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text style={styles.navigation_text}>Register</Text>
+            <Text>
+              {isLogin
+                ? "Don't have an account? "
+                : "Already have an account? "}
+            </Text>
+            <TouchableOpacity>
+              <Text
+                style={styles.navigation_text}
+                onPress={() => {
+                  setIsLogin(!isLogin);
+                }}
+              >
+                {isLogin ? "Register" : "Login"}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -97,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Auth;
