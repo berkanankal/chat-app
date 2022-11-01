@@ -34,29 +34,31 @@ const Auth = () => {
   };
 
   const loginFirebase = () => {
-    signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigation.navigate("Home");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        Alert.alert("Error", errorMessage);
-      });
+    // signInWithEmailAndPassword(auth, formData.email, formData.password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     navigation.navigate("Home");
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     Alert.alert("Error", errorMessage);
+    //   });
+    navigation.navigate("Home");
   };
 
   const registerFirebase = () => {
-    createUserWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        setIsLogin(true);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        Alert.alert("Error", errorMessage);
-      });
+    // createUserWithEmailAndPassword(auth, formData.email, formData.password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     setIsLogin(true);
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     Alert.alert("Error", errorMessage);
+    //   });
+    setIsLogin(true);
   };
 
   const handleSubmit = () => {
