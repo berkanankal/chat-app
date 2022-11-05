@@ -3,18 +3,14 @@ import {
   View,
   Text,
   TextInput,
-  Alert,
   TouchableOpacity,
   Image,
   StatusBar,
 } from "react-native";
 import styles from "./style";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { login, register } from "../../redux/authSlice";
 
 const Auth = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +20,7 @@ const Auth = () => {
   });
   const [isLogin, setIsLogin] = useState(true);
 
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleInputChange = (name, value) => {
     setFormData({
@@ -33,39 +29,38 @@ const Auth = () => {
     });
   };
 
-  const loginFirebase = () => {
-    // signInWithEmailAndPassword(auth, formData.email, formData.password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
-    //     navigation.navigate("Home");
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     Alert.alert("Error", errorMessage);
-    //   });
-    navigation.navigate("Home");
+  const handleLogin = () => {
+    const loginData = {
+      email: formData.email,
+      password: formData.password,
+    };
+
+    dispatch(login(loginData));
   };
 
-  const registerFirebase = () => {
-    // createUserWithEmailAndPassword(auth, formData.email, formData.password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
+  const handleRegister = () => {
+    const registerData = {
+      email: formData.email,
+      password: formData.password,
+      setIsLogin,
+      setFormData,
+    };
+
+    dispatch(register(registerData));
+
+    // dispatch(register(registerData)).then((res) => {
+    //   console.log(res);
+    //   if (!res.error) {
     //     setIsLogin(true);
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     Alert.alert("Error", errorMessage);
-    //   });
-    setIsLogin(true);
+    //   }
+    // });
   };
 
   const handleSubmit = () => {
     if (isLogin) {
-      loginFirebase();
+      handleLogin();
     } else {
-      registerFirebase();
+      handleRegister();
     }
   };
 
@@ -123,6 +118,13 @@ const Auth = () => {
             </Text>
           </TouchableOpacity>
 
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => console.log(auth.currentUser)}
+          >
+            <Text style={styles.btn_text}>Get User</Text>
+          </TouchableOpacity>
+
           <View style={styles.navigation_container}>
             <Text>
               {isLogin
@@ -134,6 +136,11 @@ const Auth = () => {
                 style={styles.navigation_text}
                 onPress={() => {
                   setIsLogin(!isLogin);
+                  setFormData({
+                    email: "",
+                    password: "",
+                    rePassword: "",
+                  });
                 }}
               >
                 {isLogin ? "Register" : "Login"}

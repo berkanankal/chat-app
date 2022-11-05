@@ -7,12 +7,16 @@ export default StyleSheet.create({
   image_container: {
     flex: 1,
   },
-  back_image: { width: "100%", height: "100%", resizeMode: "cover" },
+  back_image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
   white_sheet: {
     width: "100%",
+    height: "75%",
     position: "absolute",
     bottom: 0,
-    height: "75%",
     backgroundColor: "white",
     borderTopLeftRadius: 80,
   },

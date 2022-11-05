@@ -4,7 +4,7 @@ import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../../redux/authSlice";
+import {} from "../../redux/authSlice";
 
 const Home = () => {
   const { value } = useSelector((state) => state.auth);
@@ -21,8 +21,7 @@ const Home = () => {
         name="chat"
         size={36}
         color="white"
-        // onPress={() => navigation.navigate("Chat")}
-        onPress={() => dispatch(increment())}
+        onPress={() => navigation.navigate("Chat")}
       />
     </View>
   );
