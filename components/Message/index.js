@@ -1,12 +1,13 @@
 import { View, Text } from "react-native";
 import React from "react";
+import styles from "./style";
 
-const Chat = () => {
+const Message = () => {
   return (
     <View>
-      <Text>Chat</Text>
+      <Text>Message</Text>
     </View>
   );
 };
 
-export default Chat;
+export default Message;

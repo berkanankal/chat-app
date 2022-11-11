@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
@@ -10,8 +10,6 @@ const Home = () => {
   const { value } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  console.log(value);
-
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -21,7 +19,7 @@ const Home = () => {
         name="chat"
         size={36}
         color="white"
-        onPress={() => navigation.navigate("Chat")}
+        onPress={() => navigation.navigate("Conversations")}
       />
     </View>
   );

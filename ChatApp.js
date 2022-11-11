@@ -3,9 +3,10 @@ import { View, Text, Button, Alert, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector, useDispatch } from "react-redux";
-import Auth from "./pages/Auth";
-import Home from "./pages/Home";
-import Chat from "./pages/Chat";
+import Auth from "./screens/Auth";
+import Home from "./screens/Home";
+import Conversations from "./screens/Conversations";
+import Messages from "./screens/Messages";
 import { MaterialIcons } from "@expo/vector-icons";
 import { logout } from "./redux/authSlice";
 
@@ -50,7 +51,8 @@ const ChatApp = () => {
             }}
           >
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Chat" component={Chat} />
+            <Stack.Screen name="Conversations" component={Conversations} />
+            <Stack.Screen name="Messages" component={Messages} />
           </Stack.Navigator>
         </>
       )}
