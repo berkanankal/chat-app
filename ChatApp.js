@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector, useDispatch } from "react-redux";
 import Auth from "./screens/Auth";
 import Home from "./screens/Home";
-import Conversations from "./screens/Conversations";
 import Messages from "./screens/Messages";
 import { MaterialIcons } from "@expo/vector-icons";
 import { logout } from "./redux/authSlice";
@@ -51,7 +50,6 @@ const ChatApp = () => {
             }}
           >
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Conversations" component={Conversations} />
             <Stack.Screen name="Messages" component={Messages} />
           </Stack.Navigator>
         </>

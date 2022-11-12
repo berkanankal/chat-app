@@ -19,7 +19,7 @@ const Home = () => {
         name="chat"
         size={36}
         color="white"
-        onPress={() => navigation.navigate("Conversations")}
+        onPress={() => navigation.navigate("Messages")}
       />
     </View>
   );

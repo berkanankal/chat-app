@@ -8,7 +8,6 @@ import {
   StatusBar,
 } from "react-native";
 import styles from "./style";
-import { auth } from "../../config/firebase";
 import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/authSlice";
 
@@ -90,6 +89,7 @@ const Auth = () => {
             value={formData.email}
             onChangeText={(value) => handleInputChange("email", value)}
             autoCapitalize="none"
+            keyboardType="email-address"
           />
           <TextInput
             placeholder="Enter password"
@@ -116,13 +116,6 @@ const Auth = () => {
             <Text style={styles.btn_text}>
               {isLogin ? "Login" : "Register"}
             </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => console.log(auth.currentUser)}
-          >
-            <Text style={styles.btn_text}>Get User</Text>
           </TouchableOpacity>
 
           <View style={styles.navigation_container}>
