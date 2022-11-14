@@ -1,22 +1,36 @@
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { useState, useCallback, useEffect } from "react";
 import styles from "./style";
 import { GiftedChat } from "react-native-gifted-chat";
 import { db, auth } from "../../config/firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  onSnapshot,
+  doc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      const messagesCollection = collection(db, "messages");
-      const messagesSnapshot = await getDocs(messagesCollection);
-      const messagesList = messagesSnapshot.docs.map((doc) => doc.data());
-      setMessages(messagesList);
-    };
+  const windowHeight = Dimensions.get("window").height;
 
-    fetchMessages();
+  useEffect(() => {
+    const messagesRef = collection(db, "messages");
+    const q = query(messagesRef, orderBy("createdAt", "desc"));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const messages = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        createdAt: doc.data().createdAt.toDate(),
+      }));
+      setMessages(messages);
+    });
+
+    return unsubscribe;
   }, []);
 
   const onSend = useCallback((messages = []) => {
@@ -29,7 +43,7 @@ const Messages = () => {
     try {
       addDoc(collection(db, "messages"), {
         _id,
-        createdAt: createdAt.toString(),
+        createdAt,
         text,
         user,
       });
@@ -44,6 +58,7 @@ const Messages = () => {
       onSend={(messages) => onSend(messages)}
       user={{
         _id: auth.currentUser.uid,
+        avatar: "https://placeimg.com/140/140/any",
       }}
     />
   );
