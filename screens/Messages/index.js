@@ -1,22 +1,17 @@
-import { View, Text, Dimensions } from "react-native";
 import { useState, useCallback, useEffect } from "react";
 import styles from "./style";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { db, auth } from "../../config/firebase";
 import {
   collection,
   addDoc,
-  getDocs,
   onSnapshot,
-  doc,
   query,
   orderBy,
 } from "firebase/firestore";
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
-
-  const windowHeight = Dimensions.get("window").height;
 
   useEffect(() => {
     const messagesRef = collection(db, "messages");
@@ -59,6 +54,18 @@ const Messages = () => {
       user={{
         _id: auth.currentUser.uid,
         avatar: "https://placeimg.com/140/140/any",
+      }}
+      renderBubble={(props) => {
+        return (
+          <Bubble
+            {...props}
+            wrapperStyle={{
+              right: {
+                backgroundColor: "#7953d2",
+              },
+            }}
+          />
+        );
       }}
     />
   );

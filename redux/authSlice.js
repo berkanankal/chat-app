@@ -8,13 +8,9 @@ import {
 import { auth } from "../config/firebase";
 
 export const logout = createAsyncThunk("auth/logout", (payload, thunkAPI) => {
-  signOut(auth)
-    .then(() => {
-      Alert.alert("Success", "Logout success");
-    })
-    .catch((err) => {
-      Alert.alert("Error", err.message);
-    });
+  signOut(auth).catch((err) => {
+    Alert.alert("Error", err.message);
+  });
 });
 
 export const login = createAsyncThunk("auth/login", (payload, thunkAPI) => {
@@ -26,8 +22,6 @@ export const login = createAsyncThunk("auth/login", (payload, thunkAPI) => {
         email: userCredential.user.email,
         uid: userCredential.user.uid,
       };
-
-      Alert.alert("Success", "Login success");
 
       return data;
     })
@@ -45,12 +39,6 @@ export const register = createAsyncThunk(
 
     return createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        Alert.alert("Success", "Register success");
-        setFormData({
-          email: "",
-          password: "",
-        });
-
         setIsLogin(true);
       })
       .catch((err) => {
@@ -71,17 +59,12 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: {
     [logout.fulfilled]: (state) => {
-      console.log("logout çalıştı");
       state.user = null;
     },
     [login.fulfilled]: (state, action) => {
-      console.log("login çalıştı");
       state.user = action.payload;
     },
-    [register.fulfilled]: (state, action) => {
-      console.log(action);
-      console.log("register çalıştı");
-    },
+    [register.fulfilled]: (state, action) => {},
   },
 });
 

@@ -23,6 +23,7 @@ export default StyleSheet.create({
   form_container: {
     flex: 2,
     paddingHorizontal: 40,
+    marginTop: -30,
   },
   header_text: {
     fontSize: 30,

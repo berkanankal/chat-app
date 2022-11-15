@@ -17,7 +17,15 @@ const ChatApp = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout());
+    Alert.alert("Logout", "Are you sure you want to logout?", [
+      {
+        text: "Cancel",
+      },
+      {
+        text: "Logout",
+        onPress: () => dispatch(logout()),
+      },
+    ]);
   };
 
   return (
@@ -34,23 +42,31 @@ const ChatApp = () => {
         </Stack.Navigator>
       ) : (
         <>
-          <Stack.Navigator
-            screenOptions={{
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={handleLogout}
-                  style={{
-                    marginRight: 10,
-                  }}
-                  activeOpacity={0.6}
-                >
-                  <MaterialIcons name="logout" size={32} color="#7953d2" />
-                </TouchableOpacity>
-              ),
-            }}
-          >
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Messages" component={Messages} />
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Messages"
+              component={Messages}
+              options={{
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={handleLogout}
+                    style={{
+                      marginRight: 10,
+                    }}
+                    activeOpacity={0.6}
+                  >
+                    <MaterialIcons name="logout" size={32} color="#7953d2" />
+                  </TouchableOpacity>
+                ),
+              }}
+            />
           </Stack.Navigator>
         </>
       )}

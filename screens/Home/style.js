@@ -12,4 +12,16 @@ export default StyleSheet.create({
     backgroundColor: "#7953d2",
     borderRadius: 50,
   },
+  back_image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+    alignItems: "center",
+  },
+  home_text: {
+    color: "white",
+    fontSize: 40,
+    fontWeight: "bold",
+    marginTop: 60,
+  },
 });
