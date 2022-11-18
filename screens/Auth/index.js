@@ -10,28 +10,32 @@ import {
 import styles from "./style";
 import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/authSlice";
+import { useFormik } from "formik";
 
 const Auth = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rePassword: "",
-  });
   const [isLogin, setIsLogin] = useState(true);
 
   const dispatch = useDispatch();
 
-  const handleInputChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const { values, handleSubmit, handleChange, resetForm } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      rePassword: "",
+    },
+    onSubmit: () => {
+      if (isLogin) {
+        handleLogin();
+      } else {
+        handleRegister();
+      }
+    },
+  });
 
   const handleLogin = () => {
     const loginData = {
-      email: formData.email,
-      password: formData.password,
+      email: values.email,
+      password: values.password,
     };
 
     dispatch(login(loginData));
@@ -39,10 +43,10 @@ const Auth = () => {
 
   const handleRegister = () => {
     const registerData = {
-      email: formData.email,
-      password: formData.password,
+      email: values.email,
+      password: values.password,
       setIsLogin,
-      setFormData,
+      resetForm,
     };
 
     dispatch(register(registerData));
@@ -53,14 +57,6 @@ const Auth = () => {
     //     setIsLogin(true);
     //   }
     // });
-  };
-
-  const handleSubmit = () => {
-    if (isLogin) {
-      handleLogin();
-    } else {
-      handleRegister();
-    }
   };
 
   return (
@@ -86,8 +82,8 @@ const Auth = () => {
             placeholder="Enter email"
             placeholderTextColor="#9e9e9e"
             style={styles.input}
-            value={formData.email}
-            onChangeText={(value) => handleInputChange("email", value)}
+            value={values.email}
+            onChangeText={handleChange("email")}
             autoCapitalize="none"
             keyboardType="email-address"
           />
@@ -95,8 +91,8 @@ const Auth = () => {
             placeholder="Enter password"
             placeholderTextColor="#9e9e9e"
             style={styles.input}
-            value={formData.password}
-            onChangeText={(value) => handleInputChange("password", value)}
+            value={values.password}
+            onChangeText={handleChange("password")}
             secureTextEntry
             autoCapitalize="none"
           />
@@ -105,8 +101,8 @@ const Auth = () => {
               placeholder="Confirm password"
               placeholderTextColor="#9e9e9e"
               style={styles.input}
-              value={formData.rePassword}
-              onChangeText={(value) => handleInputChange("rePassword", value)}
+              value={values.rePassword}
+              onChangeText={handleChange("rePassword")}
               secureTextEntry
               autoCapitalize="none"
             />
@@ -129,11 +125,7 @@ const Auth = () => {
                 style={styles.navigation_text}
                 onPress={() => {
                   setIsLogin(!isLogin);
-                  setFormData({
-                    email: "",
-                    password: "",
-                    rePassword: "",
-                  });
+                  resetForm();
                 }}
               >
                 {isLogin ? "Register" : "Login"}

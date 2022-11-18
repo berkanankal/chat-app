@@ -35,11 +35,12 @@ export const login = createAsyncThunk("auth/login", (payload, thunkAPI) => {
 export const register = createAsyncThunk(
   "auth/register",
   (payload, thunkAPI) => {
-    const { email, password, setIsLogin, setFormData } = payload;
+    const { email, password, setIsLogin, resetForm } = payload;
 
     return createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         setIsLogin(true);
+        resetForm();
       })
       .catch((err) => {
         const errCode = err.code;
