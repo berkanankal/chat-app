@@ -11,11 +11,35 @@ import styles from "./style";
 import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/authSlice";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const dispatch = useDispatch();
+
+  const loginSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Please enter a valid email")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .max(32, "Password must be at most 32 characters")
+      .required("Password is required"),
+    rePassword: Yup.string()
+      .oneOf([Yup.ref("password")], "Passwords must match")
+      .required("Confirm password is required"),
+  });
+
+  const registerSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Please enter a valid email")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .max(32, "Password must be at most 32 characters")
+      .required("Password is required"),
+  });
 
   const { values, handleSubmit, handleChange, resetForm } = useFormik({
     initialValues: {
@@ -23,7 +47,9 @@ const Auth = () => {
       password: "",
       rePassword: "",
     },
-    onSubmit: () => {
+    validationSchema: isLogin ? loginSchema : registerSchema,
+    onSubmit: (values) => {
+      console.log(values);
       if (isLogin) {
         handleLogin();
       } else {
