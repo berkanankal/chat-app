@@ -28,18 +28,22 @@ export default StyleSheet.create({
   header_text: {
     fontSize: 30,
     alignSelf: "center",
-    marginBottom: 20,
+    marginBottom: 5,
     color: "#7953d2",
     fontWeight: "bold",
   },
   input: {
     height: 55,
-    marginBottom: 15,
     borderWidth: 1,
+    marginTop: 15,
     paddingLeft: 15,
     backgroundColor: "#e0e0e0",
     borderWidth: 0,
     borderRadius: 10,
+  },
+  error_text: {
+    color: "red",
+    fontSize: 12,
   },
   btn: {
     backgroundColor: "#4527a0",

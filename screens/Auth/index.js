@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { login, register } from "../../redux/authSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -41,22 +42,23 @@ const Auth = () => {
       .required("Password is required"),
   });
 
-  const { values, handleSubmit, handleChange, resetForm } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      rePassword: "",
-    },
-    validationSchema: isLogin ? loginSchema : registerSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      if (isLogin) {
-        handleLogin();
-      } else {
-        handleRegister();
-      }
-    },
-  });
+  const { values, handleSubmit, handleChange, resetForm, errors, touched } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+        rePassword: "",
+      },
+      validationSchema: isLogin ? loginSchema : registerSchema,
+      onSubmit: (values) => {
+        console.log(values);
+        if (isLogin) {
+          handleLogin();
+        } else {
+          handleRegister();
+        }
+      },
+    });
 
   const handleLogin = () => {
     const loginData = {
@@ -113,6 +115,9 @@ const Auth = () => {
             autoCapitalize="none"
             keyboardType="email-address"
           />
+          {errors.email && touched.email && (
+            <Text style={styles.error_text}>{errors.email}</Text>
+          )}
           <TextInput
             placeholder="Enter password"
             placeholderTextColor="#9e9e9e"
@@ -122,16 +127,26 @@ const Auth = () => {
             secureTextEntry
             autoCapitalize="none"
           />
+          <FontAwesome name="eye" size={24} color="black" />
+          <FontAwesome name="eye-slash" size={24} color="black" />
+          {errors.password && touched.password && (
+            <Text style={styles.error_text}>{errors.password}</Text>
+          )}
           {isLogin && (
-            <TextInput
-              placeholder="Confirm password"
-              placeholderTextColor="#9e9e9e"
-              style={styles.input}
-              value={values.rePassword}
-              onChangeText={handleChange("rePassword")}
-              secureTextEntry
-              autoCapitalize="none"
-            />
+            <>
+              <TextInput
+                placeholder="Confirm password"
+                placeholderTextColor="#9e9e9e"
+                style={styles.input}
+                value={values.rePassword}
+                onChangeText={handleChange("rePassword")}
+                secureTextEntry
+                autoCapitalize="none"
+              />
+              {errors.rePassword && touched.rePassword && (
+                <Text style={styles.error_text}>{errors.rePassword}</Text>
+              )}
+            </>
           )}
 
           <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
