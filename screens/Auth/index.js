@@ -16,6 +16,8 @@ import { FontAwesome } from "@expo/vector-icons";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [rePasswordVisible, setRePasswordVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -51,7 +53,6 @@ const Auth = () => {
       },
       validationSchema: isLogin ? loginSchema : registerSchema,
       onSubmit: (values) => {
-        console.log(values);
         if (isLogin) {
           handleLogin();
         } else {
@@ -87,6 +88,13 @@ const Auth = () => {
     // });
   };
 
+  const handlePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+  const handleRePasswordVisibility = () => {
+    setRePasswordVisible(!rePasswordVisible);
+  };
+
   return (
     <>
       <StatusBar
@@ -118,31 +126,48 @@ const Auth = () => {
           {errors.email && touched.email && (
             <Text style={styles.error_text}>{errors.email}</Text>
           )}
-          <TextInput
-            placeholder="Enter password"
-            placeholderTextColor="#9e9e9e"
-            style={styles.input}
-            value={values.password}
-            onChangeText={handleChange("password")}
-            secureTextEntry
-            autoCapitalize="none"
-          />
-          <FontAwesome name="eye" size={24} color="black" />
-          <FontAwesome name="eye-slash" size={24} color="black" />
+          <View style={styles.password_container}>
+            <TextInput
+              placeholder="Enter password"
+              placeholderTextColor="#9e9e9e"
+              value={values.password}
+              style={styles.password_input}
+              onChangeText={handleChange("password")}
+              secureTextEntry={!passwordVisible}
+              autoCapitalize="none"
+            />
+            <TouchableOpacity onPress={handlePasswordVisibility}>
+              <FontAwesome
+                name={!passwordVisible ? "eye" : "eye-slash"}
+                size={24}
+                color="black"
+              />
+            </TouchableOpacity>
+          </View>
+
           {errors.password && touched.password && (
             <Text style={styles.error_text}>{errors.password}</Text>
           )}
           {isLogin && (
             <>
-              <TextInput
-                placeholder="Confirm password"
-                placeholderTextColor="#9e9e9e"
-                style={styles.input}
-                value={values.rePassword}
-                onChangeText={handleChange("rePassword")}
-                secureTextEntry
-                autoCapitalize="none"
-              />
+              <View style={styles.password_container}>
+                <TextInput
+                  placeholder="Confirm password"
+                  placeholderTextColor="#9e9e9e"
+                  value={values.rePassword}
+                  style={styles.password_input}
+                  onChangeText={handleChange("rePassword")}
+                  secureTextEntry={!rePasswordVisible}
+                  autoCapitalize="none"
+                />
+                <TouchableOpacity onPress={handleRePasswordVisibility}>
+                  <FontAwesome
+                    name={!rePasswordVisible ? "eye" : "eye-slash"}
+                    size={24}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              </View>
               {errors.rePassword && touched.rePassword && (
                 <Text style={styles.error_text}>{errors.rePassword}</Text>
               )}
@@ -166,6 +191,8 @@ const Auth = () => {
                 style={styles.navigation_text}
                 onPress={() => {
                   setIsLogin(!isLogin);
+                  setPasswordVisible(false);
+                  setRePasswordVisible(false);
                   resetForm();
                 }}
               >

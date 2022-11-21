@@ -41,6 +41,23 @@ export default StyleSheet.create({
     borderWidth: 0,
     borderRadius: 10,
   },
+  password_container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingRight: 20,
+    height: 55,
+    borderWidth: 1,
+    marginTop: 15,
+    paddingLeft: 15,
+    backgroundColor: "#e0e0e0",
+    borderWidth: 0,
+    borderRadius: 10,
+  },
+  password_input: {
+    flex: 1,
+    paddingVertical: 12,
+  },
   error_text: {
     color: "red",
     fontSize: 12,
