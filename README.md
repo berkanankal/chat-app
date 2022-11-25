@@ -65,6 +65,13 @@ Will be added soon.
 
 ## Screenshots
 
-Will be added soon.
+<img align="left" src="https://user-images.githubusercontent.com/67144252/204038977-4b16d35e-c8b1-4120-90db-aeb046c47877.jpg" width="400" height="700">
+<img src="https://user-images.githubusercontent.com/67144252/204038990-52ddbc0b-3146-4f30-9eaa-222fe0779cba.jpg" width="400" height="700">
+<img align="left" src="https://user-images.githubusercontent.com/67144252/204039340-e1096af2-6d78-4b46-96c8-15c4c6cd7968.jpg" width="400" height="700">
+<img src="https://user-images.githubusercontent.com/67144252/204039346-acb593a2-c867-46dd-a706-8781c1d88bb0.jpg" width="400" height="700">
+<img align="left" src="https://user-images.githubusercontent.com/67144252/204039462-554d76f3-ab23-48f2-a1fa-7da4114c6b75.jpg" width="400" height="700">
+<img src="https://user-images.githubusercontent.com/67144252/204039479-467bb80b-3980-45b1-9bec-c5cfb2f7d70a.jpg" width="400" height="700">
+
+
 
 
