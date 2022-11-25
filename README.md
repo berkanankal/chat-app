@@ -1,7 +1,7 @@
 
-# Project Title
+# React Native Chat App
 
-Will be added soon.
+An example how to use React Native + Firebase to create a chat app.
 
 ## Tech Stack
 
