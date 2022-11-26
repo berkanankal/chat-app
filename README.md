@@ -36,13 +36,13 @@ You can open the project in the [Firebase](https://firebase.google.com/), then y
 First clone this repository.
 
 ```bash
-  git clone https://github.com/berkanankal/react-native-chat-app.git
+git clone https://github.com/berkanankal/react-native-chat-app.git
 ```
 
 Go to the project directory.
 
 ```bash
-  cd react-native-chat-app
+cd react-native-chat-app
 ```
 
 Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/en/) & [`npm`](https://www.npmjs.com/) installed in your system.
