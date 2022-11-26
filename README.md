@@ -55,7 +55,7 @@ Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/e
 npm install
 ```
 
-Run the app. Make sure you already have [`Android Studio`](https://developer.android.com/studio) OR [`Xcode`](https://developer.apple.com/xcode/)  installed in your system.
+Run the app. Make sure you already have [`Genymotion`](https://www.genymotion.com/) OR [`Android Studio`](https://developer.android.com/studio) OR [`Xcode`](https://developer.apple.com/xcode/)  installed in your system.
 
 ```bash
 npm run android OR npm run ios
