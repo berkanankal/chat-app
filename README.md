@@ -30,6 +30,10 @@ You can open the project in the [Firebase](https://firebase.google.com/), then y
 
 ![firebase](https://user-images.githubusercontent.com/67144252/204036824-a24bf906-076a-4a90-b3a6-a98186d987c8.png)
 
+You should also configure the Authentication and Firestore Database from the left menu.
+
+![firebase2](https://user-images.githubusercontent.com/67144252/204089924-31a96746-e9c9-480e-917c-e529b6abb124.png)
+
 
 ## Run Locally
 
