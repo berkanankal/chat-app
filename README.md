@@ -3,6 +3,14 @@
 
 An example how to use React Native + Firebase to create a chat app.
 
+
+## Demo
+
+You can access the application by reading the code below from your device.
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/67144252/204866598-18df0aa9-3797-4c76-bec3-ea87c8f598ea.svg" width="150" height="150">
+
 ## Tech Stack
 
 - [React Native](https://reactnative.dev/) - JavaScript framework for writing real, natively rendering mobile applications for iOS and Android.
@@ -60,12 +68,6 @@ Run the app. Make sure you already have [`Genymotion`](https://www.genymotion.co
 ```bash
 npm run android OR npm run ios
 ```
-
-
-## Demo
-
-Will be added soon.
-
 
 ## Screenshots
 
